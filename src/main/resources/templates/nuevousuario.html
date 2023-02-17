@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Gestor de tareas: Registro de nuevo usuario</title>
+</head>
+<body>
+<div th:insert="fragmento.html"> </div>
+<ul class="navbar-nav">
+  <li class="nav-item" th:switch="${user}">
+    <div th:case="'No se ha iniciado sesión'"> <a class="btn btn-success" role="button" th:href="@{/login}">Log In</a>  </div>
+    <div th:case="*"th:href="@{/login}"> <a class="btn btn-danger" role="button" th:href="@{/logout}">Log Out</a></div>
+  </li>
+</ul>
+</div>
+</nav>
+<form th:action="@{/guardar}" th:object="${usuario}" method="post">
+  <fieldset><legend>Registro de un nuevo usuario: </legend>
+    <table>
+      <tr>
+        <td><label>NIF: </label></td>
+        <td><input type="text" th:field="*{nif}" /></td>
+      </tr>
+      <tr>
+        <td><label>Nombre: </label></td>
+        <td><input type="text" th:field="*{nombre}" /></td>
+      </tr>
+      <tr>
+        <td><label>Apellidos: </label></td>
+        <td><input type="text" th:field="*{apellidos}" /></td>
+      </tr>
+      <tr>
+        <td><label>Contraseña: </label></td>
+        <td><input type="password" th:field="*{pw}" /></td>
+      </tr>
+      <tr>
+        <td><label>Estado (1=Activo, 0=Inactivo): </label></td>
+        <td><input type="number" min="0" max="1" th:field="*{activo}" /></td>
+      </tr>
+      <tr>
+        <td>
+          <button type="submit">Guardar nuevo usuario</button>
+        </td>
+      </tr>
+    </table>
+  </fieldset>
+</form>
+<h2><a th:href="@{/}">Home page</a></h2>
+</body>
+</html>
