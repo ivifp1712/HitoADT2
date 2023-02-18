@@ -18,4 +18,8 @@ public class RoleService {
 
     public void guardarRol(Role rol) {roles.save(rol);
     }
+
+    public void borrarRolById(int id) {
+        roles.deleteById(id);
+    }
 }

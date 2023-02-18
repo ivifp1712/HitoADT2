@@ -27,19 +27,19 @@
     <tr th:each="tarea : ${listaTareas}">
         <td th:text="${tarea.getNombre()}"></td>
         <td th:text="${tarea.getDescripcion()}"></td>
-        <td th:text="${tarea.getEstado()}"></td>
+        <td
+        <th:block th:switch="${tarea.getEstado()}">
+            <th:block th:case="'0'">🟠</th:block>
+            <th:block th:case="'1'">🟢</th:block>
+            <th:block th:case="*">Error</th:block>
+        </th:block>
+        </td>
         <td th:text="${tarea.usuario.getNif()}"></td>
         <td>
-            <a class="btn btn-primary" th:href="@{/user/tareas/editar/{id}(id=${tarea.getId()})}">Editar</a>
-            <a class="btn btn-danger" th:href="@{/user/tareas/borrar/{id}(id=${tarea.getId()})}">Borrar</a>
+            <a class="btn btn-primary" th:href="@{/user/tareas/editar(id=${tarea.getId()})}">Editar</a>
+            <a class="btn btn-danger" th:href="@{/user/tareas/eliminar(id=${tarea.getId()})}">Borrar</a>
         </td>
     </tr>
-    <a class="btn btn-primary" th:href="@{/logout}">Cerrar sesión</a>
-
 </table>
-
-
-
-<a th:href="@{/logout}">Cerrar sesión</a>
 </body>
 </html>

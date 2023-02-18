@@ -28,4 +28,8 @@ public class UsuarioService {
 
     public void guardarUsuario(Usuario user) {usuarios.save(user);
     }
+
+    public void borrarUsuario(String nif) {usuarios.deleteById(nif);
+    }
+
 }

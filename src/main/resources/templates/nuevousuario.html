@@ -13,7 +13,7 @@
 </ul>
 </div>
 </nav>
-<form th:action="@{/guardar}" th:object="${usuario}" method="post">
+<form th:action="@{/admin/user/guardar}" th:object="${usuario}" method="post">
   <fieldset><legend>Registro de un nuevo usuario: </legend>
     <table>
       <tr>
@@ -38,12 +38,11 @@
       </tr>
       <tr>
         <td>
-          <button type="submit">Guardar nuevo usuario</button>
+          <button type="submit" class="btn btn-success">Guardar nuevo usuario</button>
         </td>
       </tr>
     </table>
   </fieldset>
 </form>
-<h2><a th:href="@{/}">Home page</a></h2>
 </body>
 </html>

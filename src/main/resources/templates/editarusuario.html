@@ -30,20 +30,19 @@
             </tr>
             <tr>
                 <td><label>Contraseña: </label></td>
-                <td><input type="password" readonly th:field="*{pw}" /></td>
+                <td><input type="password" th:field="*{pw}" /></td>
             </tr>
             <tr>
                 <td><label>Estado (1=Activo, 0=Inactivo): </label></td>
-                <td><input type="number" min="0" max="1" th:field="*{activo}" /></td>
+                <td><input type="number" th:field="*{activo}" /></td>
             </tr>
             <tr>
                 <td>
-                    <button type="submit">Guardar nuevo usuario</button>
+                    <button type="submit" class="btn btn-success">Guardar nuevo usuario</button>
                 </td>
             </tr>
         </table>
     </fieldset>
 </form>
-<h2><a th:href="@{/}">Home page</a></h2>
 </body>
 </html>

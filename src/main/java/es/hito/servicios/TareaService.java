@@ -41,4 +41,9 @@ public class TareaService {
         tareas.save(tarea);
     }
 
+    // delete tarea by nif
+    public void borrarTareaByNif(String nif) {
+        tareas.deleteByNif(nif);
+    }
+
 }

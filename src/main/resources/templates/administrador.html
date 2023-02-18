@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
-  <title>Title</title>
+  <title>Administrador</title>
 </head>
 <body>
 <div th:insert="fragmento.html"> </div>
@@ -15,45 +15,60 @@
 </div>
 </nav>
 <h1>Portal del administrador</h1>
-<form th:action="@{/admin/usuario/editar}" method="get">
-<th:block th:each="usuario : ${listaUsuarios}">
-  <p>
-    <input type="submit" th:value="${usuario.getNif()}" name="nif">
-
-  <span th:text="${usuario.getNombre()}"></span>
-    <span th:text="${usuario.getApellidos()}"></span>
-    <span th:text="${usuario.getNif()}"></span>
-<!--  crear nueva tarea, se pasa como parametro NIF-->
-    <a th:href="@{/admin/tareas/nueva(nif=${usuario.getNif()})}">Crear nueva tarea</a>
-    <ul>
-    <th:block th:each="tarea : ${usuario.getTareas()}">
-      <li>
-        <span th:text="${tarea.getNombre()}"></span>
-        <span> - </span>
-        <span th:text="${tarea.getDescripcion()}"></span>
-        <span> - </span>
-        <style>
-            .estado {
-                display: inline-block;
-            }
-        </style>
-        <span th:switch="${tarea.getEstado()}">
-          <p th:case="'1'" class="estado">🟢</p>
-          <p th:case="'0'" class="estado">🔴</p>
-          <p th:case="*" class="estado">No definido</p>
-        </span>
-        <span> - </span>
-        <a th:href="@{/admin/tareas/editar(nif=${usuario.getNif()}, id=${tarea.getId()})}">Editar</a>
-        <span> - </span>
-        <a th:href="@{/admin/tareas/eliminar(nif=${usuario.getNif()}, id=${tarea.getId()})}">Eliminar</a>
-      </li>
-    </th:block>
-    </ul>
-  </p>
-</th:block>
+<!--crear usuario-->
+<form th:action="@{/admin/usuario/nuevo}" method="get">
+  <button type="submit" class="btn btn-success">Crear usuario</button>
 </form>
-<p>
-  <a th:href="@{/admin/usuario/nuevo}">Registrar un nuevo usuario</a>
-</p>
+<form th:action="@{/admin/usuario/editar}" method="get">
+  <table>
+    <tr>
+        <th>Información</th>
+        <th>Acciones</th>
+        <th>Tarea: Nombre - Descripción - Estado</th>
+    </tr>
+        <th:block th:each="usuario : ${listaUsuarios}">
+        <tr>
+          <td>
+          <div>
+            <p th:text="${usuario.getNombre()}"></p>
+            <p th:text="${usuario.getApellidos()}"></p>
+            <p th:text="${usuario.getNif()}"></p>
+            <th:block th:switch="${usuario.getActivo()}">
+              <div th:case="'1'" class="estado">🟢</div>
+              <div th:case="'0'" class="estado">🟠</div>
+                <div th:case="*" class="estado">Error</div>
+            </th:block>
+            <p th:text="${usuario.getRoles()}"></p>
+          </div>
+          </td>
+          <td>
+            <button type="submit" class="btn btn-warning" th:value="${usuario.getNif()}" name="nif">Editar usuario</button>
+            <a class="btn btn-danger" th:href="@{/admin/usuario/eliminar(nif=${usuario.getNif()})}">Eliminar usuario</a>
+            <a class="btn btn-success" th:href="@{/admin/tareas/nueva(nif=${usuario.getNif()})}">Crear tarea</a>
+          </td>
+          <td>
+          <th:block th:each="tarea : ${usuario.getTareas()}">
+            <li>
+              <span th:text="${tarea.getNombre()}"></span>
+              <span> - </span>
+              <span th:text="${tarea.getDescripcion()}"></span>
+              <span> - </span>
+              <th:block th:switch="${tarea.getEstado()}">
+                <span th:case="'1'" class="estado">🟢</span>
+                <span th:case="'0'" class="estado">🔴</span>
+                <span th:case="*" class="estado">🟠</span>
+              </th:block>
+              <a class="btn btn-warning" th:href="@{/admin/tareas/editar(nif=${usuario.getNif()}, id=${tarea.getId()})}">Editar tarea</a>
+              <a class="btn btn-danger" th:href="@{/admin/tareas/eliminar(nif=${usuario.getNif()}, id=${tarea.getId()})}">Eliminar tarea</a>
+          </th:block>
+          </td>
+          <td>
+          </td>
+          </th:block>
+            </td>
+        </tr>
+        </th:block>
+  </table>
+</form>
 </body>
 </html>

@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Perfil</title>
 </head>
 <body>
 <div th:insert="fragmento.html"> </div>
@@ -14,8 +14,27 @@
 </ul>
 </div>
 </nav>
-<h1>Esta es la vista perfil.html</h1>
-
-<a th:href="@{/logout}">Cerrar sesión</a>
+<h1>Mi perfil</h1>
+<div>
+    <h5>Nombre</h5>
+    <p th:text="${usuario.getNombre()}"></p>
+</div>
+<div>
+    <h5>Apellido</h5>
+    <p th:text="${usuario.getApellidos()}"></p>
+</div>
+<div>
+    <h5>Activo</h5>
+    <th:block th:switch="${usuario.getActivo()}">
+        <div th:case="'1'">🟢</div>
+        <div th:case="'0'">🔴</div>
+        <div th:case="*">🟠</div>
+    </th:block>
+</div>
+<div>
+    <h5>Roles</h5>
+    <p th:text="${usuario.getRoles()}"></p>
+</div>
+<a class="btn btn-danger" role="button" th:href="@{/logout}">Log Out</a>
 </body>
 </html>

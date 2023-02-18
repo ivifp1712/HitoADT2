@@ -1,8 +1,7 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>Nueva Tarea</title>
+    <title>Gestor de tareas</title>
 </head>
 <body>
 <div th:insert="fragmento.html"> </div>
@@ -14,10 +13,13 @@
 </ul>
 </div>
 </nav>
-<h1>Nueva tarea</h1>
-<form th:action="@{/user/tareas/nueva/crear}" th:object="${tarea}" method="post">
-    <fieldset><legend>Registro de una nueva tarea: </legend>
+<form th:action="@{/user/tareas/actualizar(nif=${tarea.usuario.getNif()})}" th:object="${tarea}" method="post">
+    <fieldset><legend>Edición de los datos de la tarea: </legend>
         <table>
+            <tr>
+                <td><label>Id: </label></td>
+                <td><input type="text" readonly th:field="*{id}" /></td>
+            </tr>
             <tr>
                 <td><label>Nombre: </label></td>
                 <td><input type="text" th:field="*{nombre}" /></td>
@@ -27,10 +29,15 @@
                 <td><input type="text" th:field="*{descripcion}" /></td>
             </tr>
             <tr>
-                <td><label>Estado: (0: inactiva, 1: activa)</label></td>
-                <td><input type="number" th:field="*{estado}" /></td>
+                <td><label>Estado (1=Activo, 0=Inactivo): </label></td>
+<!--                <td><input type="number" min="0" max="1" th:field="*{estado}" /></td>-->
+                <td>
+                    <select th:field="*{estado}">
+                        <option th:value="0" th:text="Pendiente"></option>
+                        <option th:value="1" th:text="Completa"></option>
+                    </select>
+                </td>
             </tr>
-            <tr>
                 <td>
                     <button type="submit" class="btn btn-success">Guardar nueva tarea</button>
                 </td>

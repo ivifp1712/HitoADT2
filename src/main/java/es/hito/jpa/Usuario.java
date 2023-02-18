@@ -22,11 +22,9 @@ public class Usuario implements Serializable {
 
     private String pw;
 
-    //bi-directional many-to-one association to Role
     @OneToMany(mappedBy="usuario")
     private List<Role> roles;
 
-    //bi-directional many-to-one association to Tarea
     @OneToMany(mappedBy="usuario")
     private List<Tarea> tareas;
 
@@ -45,7 +43,6 @@ public class Usuario implements Serializable {
     public void setNif(String nif) {
         this.nif = nif;
     }
-
     public byte getActivo() {
         return this.activo;
     }
@@ -132,7 +129,5 @@ public class Usuario implements Serializable {
                 ", pw='" + pw + '\'' +
                 '}';
     }
-
-    //comprobar si es administrador
 
 }

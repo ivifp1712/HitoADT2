@@ -67,5 +67,7 @@ public class Tarea implements Serializable {
         return "Tarea [id=" + id + ", descripcion=" + descripcion + ", estado=" + estado + ", nombre=" + nombre + ", usuario=" + usuario + "]";
     }
 
-
+    public String getUsuarioNif() {
+        return this.usuario.getNif();
+    }
 }

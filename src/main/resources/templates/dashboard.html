@@ -2,7 +2,12 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Dashboard</title>
+    <style>
+        .dato{
+            display: inline-block;
+        }
+    </style>
 </head>
 <body>
 <div th:insert="fragmento.html"> </div>
@@ -14,8 +19,21 @@
 </ul>
 </div>
 </nav>
-<h1>Esta es la vista dashboard.html</h1>
+<h1>Dashboard</h1>
+<h2>Tareas:</h2>
+    <h3>Total de tareas: </h3>
+    <p th:text="${tareas.size()}" class="dato"></p>
+    <h3>Tareas completadas: </h3>
+    <p th:text="${tareasCompletadas.size()}" class="dato"></p>
+    <h3>Tareas pendientes: </h3>
+    <p th:text="${tareasPendientes.size()}" class="dato"></p>
+<h2>Usuarios</h2>
+    <h3>Total de usuarios: </h3>
+    <p th:text="${usuarios.size()}" class="dato"></p>
+    <h3>Promedio de tareas por usuario </h3>
+    <p th:text="${promedio}" class="dato"></p>
 
-<a th:href="@{/logout}">Cerrar sesión</a>
+
+
 </body>
 </html>

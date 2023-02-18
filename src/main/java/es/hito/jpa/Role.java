@@ -13,7 +13,6 @@ public class Role implements Serializable {
 
     private String rol;
 
-    //bi-directional many-to-one association to Usuario
     @ManyToOne
     @JoinColumn(name="nif")
     private Usuario usuario;
@@ -47,9 +46,9 @@ public class Role implements Serializable {
 
     @Override
     public String toString() {
-        return "Role [id=" + id + ", rol=" + rol + ", usuario=" + usuario + "]";
+        return "Rol " + getRol();
     }
 
-    //comprobar si es administrador
+
 
 }
